@@ -35,8 +35,8 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
       })
       if (error) throw error
       setSuccess(true)
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : 'An error occurred')
+    } catch {
+       setError('Unable to send reset email right now. Please try again shortly.')
     } finally {
       setIsLoading(false)
     }

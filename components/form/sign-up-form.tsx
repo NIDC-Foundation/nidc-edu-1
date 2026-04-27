@@ -162,6 +162,20 @@ export function SignUpForm() {
                   icon={Shield}
                 />
 
+                <FormField
+                  name="terms"
+                  control={control}
+                  type="checkbox"
+                  label={
+                    <>
+                      I agree to the{" "}
+                      <Link href="/terms" className="underline hover:no-underline">
+                        Terms of Service
+                      </Link>
+                    </>
+                  }
+                />
+
                 {/* Root error */}
                 {errors.root && (
                   <p className="text-sm text-red-500">{errors.root.message}</p>

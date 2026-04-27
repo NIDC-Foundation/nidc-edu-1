@@ -132,7 +132,7 @@ export function LoginForm() {
                   <div className="flex items-center justify-between w-full">
                     <span>Password</span>
                     <Link
-                      href="/forgot-password"
+                      href="/auth/forgot-password"
                       className="text-xs text-primary hover:underline"
                     >
                       Forgot password?
@@ -166,7 +166,7 @@ export function LoginForm() {
               <p className="text-xs text-muted-foreground">
                 Don&apos;t have an account?{" "}
                 <Link
-                  href="/sign-up"
+                  href="/auth/sign-up"
                   className="text-primary font-semibold underline"
                 >
                   Create one

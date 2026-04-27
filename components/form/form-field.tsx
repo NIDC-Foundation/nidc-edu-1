@@ -69,6 +69,8 @@ export function FormField<T extends FieldValues>(props: Props<T>) {
                 type="checkbox"
                 checked={!!field.value}
                 onChange={(e) => field.onChange(e.target.checked)}
+                onBlur={field.onBlur}
+                ref={field.ref}
                 className="mt-1 accent-primary"
               />
 
