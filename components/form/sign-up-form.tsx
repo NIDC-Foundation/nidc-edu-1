@@ -162,6 +162,13 @@ export function SignUpForm() {
                   icon={Shield}
                 />
 
+                <FormField
+                  name="terms"
+                  control={control}
+                  type="checkbox"
+                  label="I agree to the terms and conditions."
+                />
+
                 {/* Root error */}
                 {errors.root && (
                   <p className="text-sm text-red-500">{errors.root.message}</p>

@@ -1,11 +1,6 @@
 "use client";
-// app/(public)/courses/page.tsx
-// ============================================================
-// NIDC FOUNDATION — Courses Page
-// What students study, available programmes at partner universities
-// ============================================================
-
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -190,33 +185,36 @@ export default function CoursesPage() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<string | null>(null);
 
-  useEffect(() => {
-    gsap.fromTo(
-      pageRef.current?.querySelectorAll(".hero-el") || [],
-      { opacity: 0, y: 28 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        delay: 0.2,
-      }
-    );
-    pageRef.current?.querySelectorAll(".scroll-reveal").forEach((el) => {
+  useGSAP(
+    () => {
       gsap.fromTo(
-        el,
-        { opacity: 0, y: 20 },
+        pageRef.current?.querySelectorAll(".hero-el") || [],
+        { opacity: 0, y: 28 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
+          duration: 0.8,
+          stagger: 0.1,
           ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 86%" },
+          delay: 0.2,
         }
       );
-    });
-  }, []);
+      pageRef.current?.querySelectorAll(".scroll-reveal").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 86%" },
+          }
+        );
+      });
+    },
+    { scope: pageRef }
+  );
 
   return (
     <div ref={pageRef} className="bg-background text-foreground min-h-screen">
@@ -224,7 +222,7 @@ export default function CoursesPage() {
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px]
-                        bg-[radial-gradient(ellipse,_#10b98110_0%,_transparent_65%)] pointer-events-none"
+                        bg-[radial-gradient(ellipse,#10b98110_0%,transparent_65%)] pointer-events-none"
         />
         <div className="relative max-w-4xl mx-auto text-center">
           <p className="hero-el text-primary text-xs font-semibold tracking-widest uppercase mb-4">
@@ -237,7 +235,7 @@ export default function CoursesPage() {
           </h1>
           <p className="hero-el text-muted-foreground text-lg max-w-xl mx-auto leading-relaxed">
             NIDC Foundation scholarships cover degree programmes across 6 fields
-            of study at our partner universities. Browse what's available below.
+            of study at our partner universities. Browse what&apos;s available below.
           </p>
         </div>
       </section>
@@ -272,7 +270,9 @@ export default function CoursesPage() {
                   <h3 className="text-foreground font-semibold text-base mb-2">
                     {f.name}
                   </h3>
-                  <p className="text-muted-foreground/80 text-sm mb-4">{f.desc}</p>
+                  <p className="text-muted-foreground/80 text-sm mb-4">
+                    {f.desc}
+                  </p>
                   <div className="flex items-center justify-between">
                     <p className="text-muted-foreground/70 text-xs">
                       {f.programmes.length} programmes
@@ -323,14 +323,14 @@ export default function CoursesPage() {
           {/* Note */}
           <div className="scroll-reveal mt-10 bg-card border border-border/70 rounded-2xl p-6 text-center">
             <p className="text-muted-foreground text-sm">
-              Don't see your desired programme?{" "}
+              Don&apos;t see your desired programme?{" "}
               <a
                 href="mailto:apply@nidcfoundation.org"
                 className="text-primary hover:underline"
               >
                 Contact our team
               </a>{" "}
-              — we're adding new programmes and partners every quarter.
+              — we&apos;re adding new programmes and partners every quarter.
             </p>
           </div>
         </div>
