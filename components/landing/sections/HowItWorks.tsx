@@ -18,7 +18,7 @@ const STEPS = [
     title: "Apply Online",
     body: "Fill out our scholarship application — your story, your background, your university of choice. It takes about 10 minutes.",
     icon: "✍️",
-    cta: { label: "Start Application", href: "/register" },
+    cta: { label: "Start Application", href: "/sign-up" },
   },
   {
     number: "02",

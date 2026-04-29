@@ -7,16 +7,27 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 
 const NAV_LINKS = [
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Our Impact", href: "#impact" },
-  { label: "Transparency", href: "#transparency" },
-  { label: "Universities", href: "#universities" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Apply", href: "/apply" },
+  { label: "Contact", href: "/contact" },
+  { label: "Courses", href: "/course" },
+  { label: "Donate", href: "/donate" },
+  { label: "Governance", href: "/gorvernance" },
+  { label: "How It Works", href: "/how-it-work" },
+  { label: "Impact", href: "/impact" },
+  { label: "News", href: "/news" },
+  { label: "Partners", href: "/partners" },
+  { label: "Talent Pipeline", href: "/talent-pipeline" },
+  { label: "Transparency", href: "/transparency" },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -57,12 +68,6 @@ export default function Navbar() {
     }
   }, [menuOpen]);
 
-  const scrollTo = (href: string) => {
-    setMenuOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   return (
     <nav
       ref={navRef}
@@ -101,21 +106,29 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav links */}
-          <div className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => scrollTo(link.href)}
-                className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200
-                           relative group"
-              >
-                {link.label}
-                <span
-                  className="absolute -bottom-0.5 left-0 w-0 h-px bg-primary
-                                 group-hover:w-full transition-all duration-300"
-                />
-              </button>
-            ))}
+          <div className="hidden md:flex flex-1 items-center justify-center px-6">
+            <div className="flex max-w-full items-center gap-5 overflow-x-auto whitespace-nowrap scrollbar-none">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm transition-colors duration-200 relative group ${
+                    pathname === link.href
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {link.label}
+                  <span
+                    className={`absolute -bottom-0.5 left-0 h-px bg-primary transition-all duration-300 ${
+                      pathname === link.href
+                        ? "w-full"
+                        : "w-0 group-hover:w-full"
+                    }`}
+                  />
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* Desktop CTA */}
@@ -127,7 +140,7 @@ export default function Navbar() {
               Sign in
             </Link>
             <Link
-              href="/register"
+              href="/apply"
               className="relative group px-5 py-2.5 bg-primary hover:bg-accent
                          text-foreground text-sm font-medium rounded-xl transition-all duration-300
                          shadow-lg shadow-primary/25 hover:shadow-primary/35"
@@ -170,24 +183,27 @@ export default function Navbar() {
           className="md:hidden bg-card/95 backdrop-blur-xl border-t border-border/60 px-6 py-6 space-y-4"
         >
           {NAV_LINKS.map((link) => (
-            <button
+            <Link
               key={link.href}
-              onClick={() => scrollTo(link.href)}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
               className="block w-full text-left text-foreground/80 hover:text-foreground text-base
                          transition-colors duration-200 py-2"
             >
               {link.label}
-            </button>
+            </Link>
           ))}
           <div className="pt-4 border-t border-border/60 flex flex-col gap-3">
             <Link
               href="/login"
+              onClick={() => setMenuOpen(false)}
               className="text-center text-foreground/80 text-sm py-3"
             >
               Sign in
             </Link>
             <Link
-              href="/register"
+              href="/apply"
+              onClick={() => setMenuOpen(false)}
               className="text-center bg-primary hover:bg-accent text-foreground text-sm
                          font-medium rounded-xl py-3 transition-colors"
             >

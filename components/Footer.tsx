@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const LINKS = {
   Platform: [
-    { label: "Apply for Scholarship", href: "/register" },
+    { label: "Apply for Scholarship", href: "/sign-up" },
     { label: "Donate", href: "/donate" },
     { label: "Transparency Dashboard", href: "/transparency" },
     { label: "Track a Student", href: "/transparency" },

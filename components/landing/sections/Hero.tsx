@@ -177,7 +177,7 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
         >
           <Link
-            href="/register"
+            href="/sign-up"
             className="group relative px-8 py-4 bg-primary hover:bg-accent
                        text-foreground font-medium rounded-2xl transition-all duration-300
                        shadow-xl shadow-primary/30 hover:shadow-primary/40
